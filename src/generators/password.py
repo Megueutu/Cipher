@@ -8,6 +8,11 @@ def gen_password(
     case:    str  = "mix",
     specialChar: bool = False,
 ) -> str:
+    
+    if case not in _cases: raise ValueError(f"Case needs to be one of these types: {_cases}")
+    
+
+print(gen_password())
 
 def gen_salt(bits: int = 12) -> str:
     return secrets.token_hex(bits)
