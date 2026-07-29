@@ -1,32 +1,28 @@
+import json
 from pathlib import Path
+from src.domain.dataset import Dataset, BaseType
 
-_extensions = (".txt", ".csv", ".parquet", ".json", ".xml")
+DATA_PATH = Path("data/analysis")
+REGISTRY_PATH = Path("data/registry.json")
 
-def _gen_path(name: str) -> dict:
-    possibilities = {
-        "original" : [name+_extensions[i] for i in range(len(_extensions))],
-        "examples" : [name+".example"+_extensions[i] for i in range(len(_extensions))],
-    }
-    
-    return possibilities
+def load_registry() -> dict:
+    with open(REGISTRY_PATH, "r", encoding="utf-8") as file:
+        return json.load(file)
 
-def find_path(archive: str) -> str:
-    route, possibilities = Path("data/analysis/"), tuple(_gen_path(archive).values())
-    
-    folders = (
-        ("original", possibilities[0]),
-        ("examples", possibilities[1]),
-    )
+def get_datasets(basetype: BaseType) -> list[Dataset]:
+    registry, datasets = load_registry(), []
 
-    for folder, files in folders:
-        for file in files:
-            path = route / folder / file
-            if path.exists():
-                return str(path)
-        
-    raise FileNotFoundError(f"There are no such file \"{archive}\" in {route}")
+    for category, files in registry["datasets"].items():
+        for item in files:
+            dataset = Dataset(item["file"], category, basetype, item["format"])
+            datasets.append(dataset)
 
-AVAILABLE_FILES = ["animals", "books", "keyboard-patterns", "names", "rockyou"]
+    return datasets
 
-def get_paths() -> dict:
-    return {item: find_path(item) for item in AVAILABLE_FILES}
+def resolve_path(dataset: Dataset) -> Path:
+    path = (DATA_PATH / dataset.basetype.value / dataset.category.value / dataset.filename)
+
+    if not path.exists():
+        raise FileNotFoundError(f"Dataset not found: {path}")
+
+    return path

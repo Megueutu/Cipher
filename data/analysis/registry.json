@@ -1,0 +1,41 @@
+{
+    "datasets": {
+        "dictionary": [
+            {
+                "id": "animals",
+                "file": "animals.example.txt",
+                "format": "txt"
+            },
+            {
+                "id": "books",
+                "file": "books.example.txt",
+                "format": "txt"
+            },
+            {
+                "id": "cities",
+                "file": "cities.example.txt",
+                "format": "txt"
+            },
+            {
+                "id": "names",
+                "file": "names.example.txt",
+                "format": "txt"
+            }
+        ],
+        "pattern": [
+            {
+                "id": "keyboard",
+                "file": "keyboard-patterns.example.txt",
+                "format": "txt"
+            }
+        ],
+        "blacklist": [
+            {
+                "id": "rockyou",
+                "file": "rockyou.example.txt",
+                "format": "txt"
+            }
+        ],
+        "sequence": []
+    }
+}
