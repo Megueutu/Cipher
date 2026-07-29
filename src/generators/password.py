@@ -11,8 +11,3 @@ def gen_password(
     
     if case not in _cases: raise ValueError(f"Case needs to be one of these types: {_cases}")
     
-
-print(gen_password())
-
-def gen_salt(bits: int = 12) -> str:
-    return secrets.token_hex(bits)
