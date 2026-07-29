@@ -1,0 +1,1000 @@
+African Elephant
+Asian Elephant
+Blue Whale
+Fin Whale
+Humpback Whale
+Sperm Whale
+Orca
+Beluga Whale
+Narwhal
+Minke Whale
+Right Whale
+Bowhead Whale
+Gray Whale
+Sei Whale
+Lion
+Tiger
+Jaguar
+Leopard
+Snow Leopard
+Cheetah
+Cougar
+Clouded Leopard
+Caracal
+Serval
+Ocelot
+Margay
+Jaguarundi
+Bobcat
+Eurasian Lynx
+Canada Lynx
+Iberian Lynx
+Wildcat
+Sand Cat
+Black-footed Cat
+Pallas's Cat
+Fishing Cat
+Flat-headed Cat
+Rusty-spotted Cat
+Grizzly Bear
+Polar Bear
+American Black Bear
+Asian Black Bear
+Sun Bear
+Sloth Bear
+Spectacled Bear
+Giant Panda
+Red Panda
+Gray Wolf
+Red Wolf
+Coyote
+Dingo
+African Wild Dog
+Jackal
+Ethiopian Wolf
+Maned Wolf
+Bush Dog
+Dhole
+Raccoon Dog
+Red Fox
+Arctic Fox
+Fennec Fox
+Kit Fox
+Swift Fox
+Gray Fox
+Island Fox
+Crab-eating Fox
+Bat-eared Fox
+Culpeo
+Chilla
+Sea Otter
+River Otter
+Giant Otter
+Eurasian Otter
+Asian Small-clawed Otter
+Honey Badger
+Eurasian Badger
+American Badger
+Wolverine
+Stoat
+Least Weasel
+Ferret
+Marten
+Fisher
+Sable
+Mink
+Tayra
+Grison
+Meerkats
+Banded Mongoose
+Egyptian Mongoose
+Dwarf Mongoose
+Yellow Mongoose
+Civet
+Genet
+Binturong
+Fossa
+Suricate
+Spotted Hyena
+Striped Hyena
+Brown Hyena
+Aardwolf
+Aardvark
+Walrus
+California Sea Lion
+Steller Sea Lion
+South American Sea Lion
+Harbor Seal
+Grey Seal
+Harp Seal
+Ringed Seal
+Leopard Seal
+Weddell Seal
+Crabeater Seal
+Elephant Seal
+Monk Seal
+Hawaiian Monk Seal
+Fur Seal
+Platypus
+Short-beaked Echidna
+Long-beaked Echidna
+Red Kangaroo
+Eastern Gray Kangaroo
+Western Gray Kangaroo
+Antilopine Kangaroo
+Wallaby
+Tree-Kangaroo
+Pademelon
+Quokka
+Koala
+Common Wombat
+Northern Hairy-nosed Wombat
+Southern Hairy-nosed Wombat
+Tasmanian Devil
+Thylacine
+Numbat
+Quoll
+Phascogale
+Dunnart
+Bandicoot
+Bilby
+Sugar Glider
+Squirrel Glider
+Feathertail Glider
+Greater Glider
+Ringtail Possum
+Brushtail Possum
+Cuscus
+Virginia Opossum
+Water Opossum
+Monito del Monte
+Chimpanzee
+Bonobo
+Western Gorilla
+Eastern Gorilla
+Bornean Orangutan
+Sumatran Orangutan
+Tapanuli Orangutan
+Lar Gibbon
+Siamang
+White-cheeked Gibbon
+Hoolock Gibbon
+Mandrill
+Drill
+Olive Baboon
+Chacma Baboon
+Yellow Baboon
+Hamadryas Baboon
+Gelada
+Rhesus Macaque
+Japanese Macaque
+Barbary Macaque
+Crab-eating Macaque
+Lion-tailed Macaque
+Proboscis Monkey
+Golden Snub-nosed Monkey
+Hanuman Langur
+Black Howler Monkey
+Mantled Howler
+Red Howler
+Tufted Capuchin
+White-faced Capuchin
+Squirrel Monkey
+Cotton-top Tamarin
+Emperor Tamarin
+Golden Lion Tamarin
+Common Marmoset
+Pygmy Marmoset
+Ring-tailed Lemur
+Indri
+Sifaka
+Aye-aye
+Mouse Lemur
+Slow Loris
+Potto
+Bushbaby
+Tarsier
+Philippine Tarsier
+Dugong
+West Indian Manatee
+Amazonian Manatee
+African Manatee
+Hippopotamus
+Pygmy Hippopotamus
+White Rhinoceros
+Black Rhinoceros
+Indian Rhinoceros
+Javan Rhinoceros
+Sumatran Rhinoceros
+Przewalski's Horse
+Zebra
+Plains Zebra
+Grevy's Zebra
+Mountain Zebra
+African Wild Ass
+Donkey
+Onager
+Kiang
+Lowland Tapir
+Baird's Tapir
+Mountain Tapir
+Malayan Tapir
+Giraffe
+Okapi
+Reindeer
+Moose
+Elk
+Red Deer
+Fallow Deer
+Roe Deer
+Sika Deer
+Sambar Deer
+Muntjac
+Chital
+Barasingha
+Pudu
+White-tailed Deer
+Mule Deer
+Caribou
+American Bison
+European Bison
+Water Buffalo
+African Buffalo
+Gaur
+Banteng
+Yak
+Wild Boar
+Wart Hog
+Bushover
+Peccary
+Collared Peccary
+Camel
+Dromedary Camel
+Bactrian Camel
+Wild Bactrian Camel
+Llama
+Alpaca
+Vicuña
+Guanaco
+Bighorn Sheep
+Dall Sheep
+Mouflon
+Ibek
+Alpine Ibex
+Markhor
+Mountain Goat
+Chamoise
+Tahr
+Kudu
+Greater Kudu
+Lesser Kudu
+Eland
+Giant Eland
+Oryx
+Gemsbok
+Gnu
+Blue Wildebeest
+Black Wildebeest
+Impala
+Gazelle
+Thomson's Gazelle
+Grant's Gazelle
+Springbok
+Saiga Antelope
+Waterbuck
+Bushbuck
+Reedbuck
+Topi
+Hartebeest
+Blesbok
+Klipsprinter
+Dik-dik
+Duiker
+Addax
+Gerenuk
+Roan Antelope
+Sable Antelope
+Nilgai
+Chinkara
+Blackbuck
+Capybara
+Nutria
+Beaver
+North American Beaver
+Eurasian Beaver
+Porcupine
+North American Porcupine
+Crested Porcupine
+Prehensile-tailed Porcupine
+Mara
+Patagonian Mara
+Chinchilla
+Viscacha
+Guinea Pig
+Cavy
+Pacarana
+Paca
+Agouti
+Acouchi
+Tuco-tuco
+Degú
+Muskrat
+Coypu
+Groundhog
+Marmot
+Alpine Marmot
+Woodchuck
+Prairie Dog
+Chipmunk
+Red Squirrel
+Eastern Gray Squirrel
+Fox Squirrel
+Flying Squirrel
+Pine Marten
+Pocket Gopher
+Kangaroo Rat
+Jerboa
+Dormouse
+Hazel Dormouse
+Lemming
+Vole
+Bank Vole
+Field Vole
+Harvest Mouse
+House Mouse
+Field Mouse
+Deer Mouse
+Norway Rat
+Black Rat
+Naked Mole-rat
+Damaraland Mole-rat
+Star-nosed Mole
+European Mole
+Eastern Mole
+Shrew
+Eurasian Pygmy Shrew
+Water Shrew
+Hedgehog
+European Hedgehog
+African Pygmy Hedgehog
+Tenrec
+Tail-less Tenrec
+Greater Moonrat
+Vampire Bat
+Common Vampire Bat
+Fruit Bat
+Flying Fox
+Indian Flying Fox
+Little Brown Bat
+Big Brown Bat
+Horseshoe Bat
+Pipistrelle
+Natterer's Bat
+Pangolim
+Sunda Pangolin
+Giant Pangolin
+Tree Pangolin
+Ground Pangolin
+Giant Anteater
+Tamandua
+Southern Tamandua
+Silky Anteater
+Nine-banded Armadillo
+Six-banded Armadillo
+Giant Armadillo
+Pink Fairy Armadillo
+Three-banded Armadillo
+Brown Three-toed Sloth
+Pale-throated Sloth
+Linnaeus's Two-toed Sloth
+Hoffmann's Two-toed Sloth
+Pygmy Three-toed Sloth
+Maned Sloth
+Bald Eagle
+Golden Eagle
+Harpy Eagle
+African Fish Eagle
+Steller's Sea Eagle
+Spanish Imperial Eagle
+Peregrine Falcon
+Gyrfalcon
+Saker Falcon
+Lanner Falcon
+Kestrel
+American Kestrel
+Eurasian Kestrel
+Merlin
+Osprey
+Red-tailed Hawk
+Cooper's Hawk
+Sharp-shinned Hawk
+Broad-winged Hawk
+Swainson's Hawk
+Northern Goshawk
+Eurasian Sparrowhawk
+Harris's Hawk
+Marsh Harrier
+Hen Harrier
+Red Kite
+Black Kite
+Swallow-tailed Kite
+Bearded Vulture
+Griffon Vulture
+Cinereous Vulture
+Egyptian Vulture
+California Condor
+Andean Condor
+King Vulture
+Turkey Vulture
+Black Vulture
+Secretarybird
+Barn Owl
+Great Horned Owl
+Snowy Owl
+Eurasian Eagle-Owl
+Barred Owl
+Screech Owl
+Tawny Owl
+Burrowing Owl
+Elf Owl
+Northern Saw-whet Owl
+Long-eared Owl
+Short-eared Owl
+Great Gray Owl
+Spectacled Owl
+Flammulated Owl
+Northern Hawk-Owl
+Pygmy Owl
+Scops Owl
+Pelican
+American White Pelican
+Brown Pelican
+Dalmatian Pelican
+Australian Pelican
+Great White Pelican
+Pink-backed Pelican
+Shoebill
+Hammerkop
+Heron
+Great Blue Heron
+Grey Heron
+Goliath Heron
+Green Heron
+Night Heron
+Little Blue Heron
+Tricolored Heron
+Great Egret
+Little Egret
+Snowy Egret
+Cattle Egret
+Bittern
+American Bittern
+Eurasian Bittern
+Stork
+White Stork
+Black Stork
+Marabou Stork
+Yellow-billed Stork
+Painted Stork
+Jabiru
+Wood Stork
+Saddle-billed Stork
+Ibis
+Scarlet Ibis
+Glossy Ibis
+Hadada Ibis
+Sacred Ibis
+Northern Bald Ibis
+Spoonbill
+Roseate Spoonbill
+Eurasian Spoonbill
+Flamingo
+Greater Flamingo
+Lesser Flamingo
+Chilean Flamingo
+Andean Flamingo
+James's Flamingo
+American Flamingo
+Ostrich
+Common Ostrich
+Somali Ostrich
+Emu
+Southern Cassowary
+Northern Cassowary
+Dwarf Cassowary
+Rhea
+Greater Rhea
+Lesser Rhea
+Kiwi
+North Island Brown Kiwi
+Great Spotted Kiwi
+Little Spotted Kiwi
+Tinamou
+Great Tinamou
+Penguin
+Emperor Penguin
+King Penguin
+Gentoo Penguin
+Adélie Penguin
+Chinstrap Penguin
+Rockhopper Penguin
+Macaroni Penguin
+Magellanic Penguin
+Humboldt Penguin
+Galapagos Penguin
+Little Blue Penguin
+Yellow-eyed Penguin
+African Penguin
+Fiordland Penguin
+Snares Penguin
+Albatross
+Wandering Albatross
+Royal Albatross
+Black-browed Albatross
+Laysan Albatross
+Petrel
+Giant Petrel
+Storm Petrel
+Fulmar
+Shearwater
+Manx Shearwater
+Gannet
+Northern Gannet
+Booby
+Blue-footed Booby
+Red-footed Booby
+Masked Booby
+Cormorant
+Great Cormorant
+Double-crested Cormorant
+Flightless Cormorant
+Anhinga
+Frigatebird
+Great Frigatebird
+Magnificent Frigatebird
+Tropicbird
+Red-tailed Tropicbird
+Swan
+Mute Swan
+Whooper Swan
+Trumpeter Swan
+Black Swan
+Black-necked Swan
+Tundra Swan
+Goose
+Canada Goose
+Greylag Goose
+Snow Goose
+Barnacle Goose
+Brent Goose
+Bar-headed Goose
+Egyptian Goose
+Duck
+Mallard
+Wood Duck
+Mandarin Duck
+Northern Pintail
+Eurasian Wigeon
+American Wigeon
+Green-winged Teal
+Blue-winged Teal
+Northern Shoveler
+Canvasback
+Redhead
+Ring-necked Duck
+Greater Scaup
+Lesser Scaup
+Eider
+King Eider
+Harlequin Duck
+Bufflehead
+Goldeneye
+Hooded Merganser
+Goosander
+Red-breasted Merganser
+Ruddy Duck
+Peafowl
+Indian Peafowl
+Green Peafowl
+Congo Peafowl
+Pheasant
+Ring-necked Pheasant
+Golden Pheasant
+Lady Amherst's Pheasant
+Silver Pheasant
+Reeves's Pheasant
+Peacock
+Junglefowl
+Red Junglefowl
+Turkey
+Wild Turkey
+Ocellated Turkey
+Guineafowl
+Helmeted Guineafowl
+Quail
+California Quail
+Bobwhite Quail
+Japanese Quail
+Common Quail
+Partridge
+Grey Partridge
+Red-legged Partridge
+Chukar Partridge
+Grouse
+Ruffed Grouse
+Sage Grouse
+Black Grouse
+Capercaillie
+Ptarmigan
+Willow Ptarmigan
+Toucan
+Keel-billed Toucan
+Toco Toucan
+Chestnut-mandibled Toucan
+Channel-billed Toucan
+Toucanet
+Emerald Toucanet
+Aracari
+Fiery-billed Aracari
+Woodpecker
+Pileated Woodpecker
+Downy Woodpecker
+Hairy Woodpecker
+Red-headed Woodpecker
+Red-bellied Woodpecker
+Acorn Woodpecker
+Great Spotted Woodpecker
+Green Woodpecker
+Black Woodpecker
+Ivory-billed Woodpecker
+Flicker
+Northern Flicker
+Gilded Flicker
+Sapsucker
+Yellow-bellied Sapsucker
+Hummingbird
+Ruby-throated Hummingbird
+Anna's Hummingbird
+Rufous Hummingbird
+Costa's Hummingbird
+Broad-tailed Hummingbird
+Calliope Hummingbird
+Bee Hummingbird
+Sword-billed Hummingbird
+Giant Hummingbird
+Marvellous Spatuletail
+Kingfisher
+Common Kingfisher
+Belted Kingfisher
+Pied Kingfisher
+Giant Kingfisher
+Kookaburra
+Laughing Kookaburra
+Bee-eater
+European Bee-eater
+Green Bee-eater
+Carmine Bee-eater
+Roller
+European Roller
+Lilac-breasted Roller
+Hoopoe
+Hornbill
+Great Hornbill
+Rhinoceros Hornbill
+Helmeted Hornbill
+African Grey Hornbill
+Southern Ground Hornbill
+Quetzal
+Resplendent Quetzal
+Trogon
+Elegant Trogon
+Parrot
+African Grey Parrot
+Eclectus Parrot
+Senegal Parrot
+Meyer's Parrot
+Amazon Parrot
+Yellow-headed Amazon
+Blue-fronted Amazon
+Macaw
+Scarlet Macaw
+Blue-and-yellow Macaw
+Hyacinth Macaw
+Military Macaw
+Green-winged Macaw
+Great Green Macaw
+Spix's Macaw
+Parakeet
+Budgerigar
+Rose-ringed Parakeet
+Monk Parakeet
+Alexandrine Parakeet
+Cockatoo
+Sulphur-crested Cockatoo
+Galah
+Cockatiel
+Palm Cockatoo
+Major Mitchell's Cockatoo
+Black Cockatoo
+Lovebird
+Peach-faced Lovebird
+Fischer's Lovebird
+Masked Lovebird
+Lorikeet
+Rainbow Lorikeet
+Kakapo
+Kea
+Kaka
+Owl Parrot
+Passerine
+Crow
+American Crow
+Carrion Crow
+Hooded Crow
+Fish Crow
+Raven
+Common Raven
+Rook
+Jackdaw
+Eurasian Jackdaw
+Magpie
+Eurasian Magpie
+Black-billed Magpie
+Yellow-billed Magpie
+Green Jay
+Blue Jay
+Steller's Jay
+Eurasian Jay
+Canada Jay
+Nutcracker
+Clark's Nutcracker
+Eurasian Nutcracker
+Chough
+Red-billed Chough
+Alpine Chough
+Bird-of-paradise
+Greater Bird-of-paradise
+Superb Bird-of-paradise
+Wilson's Bird-of-paradise
+King of Saxony Bird-of-paradise
+Lyrebird
+Superb Lyrebird
+Albert's Lyrebird
+Bowerbird
+Satin Bowerbird
+Vogelkop Bowerbird
+Swallow
+Barn Swallow
+Cliff Swallow
+Tree Swallow
+Bank Swallow
+House Martin
+Purple Martin
+Nightingale
+Common Nightingale
+Thrush
+American Robin
+Eurasian Blackbird
+Song Thrush
+Mistle Thrush
+Fieldfare
+Redwing
+Hermit Thrush
+Wood Thrush
+Veery
+Bluebird
+Eastern Bluebird
+Western Bluebird
+Mountain Bluebird
+Chickadee
+Black-capped Chickadee
+Carolina Chickadee
+Tit
+Great Tit
+Blue Tit
+Coal Tit
+Long-tailed Tit
+Tufted Titmouse
+Nuthatch
+White-breasted Nuthatch
+Red-breasted Nuthatch
+Eurasian Nuthatch
+Wallcreeper
+Treecreeper
+Brown Creeper
+Wren
+House Wren
+Carolina Wren
+Eurasian Wren
+Cactus Wren
+Marsh Wren
+Mockingbird
+Northern Mockingbird
+Catbird
+Gray Catbird
+Thrasher
+Brown Thrasher
+Starling
+European Starling
+Superb Starling
+Myna
+Common Myna
+Hill Myna
+Waxwing
+Bohemian Waxwing
+Cedar Waxwing
+Cardinal
+Northern Cardinal
+Vermilion Cardinal
+Grosbeak
+Rose-breasted Grosbeak
+Evening Grosbeak
+Pine Grosbeak
+Bunting
+Indigo Bunting
+Painted Bunting
+Snow Bunting
+Corn Bunting
+Tanager
+Scarlet Tanager
+Summer Tanager
+Western Tanager
+Sparrow
+House Sparrow
+Eurasian Tree Sparrow
+Song Sparrow
+White-throated Sparrow
+Chipping Sparrow
+Fox Sparrow
+Finch
+House Finch
+Purple Finch
+Goldfinch
+American Goldfinch
+European Goldfinch
+Greenfinch
+Chaffinch
+Brambling
+Linnet
+Redpoll
+Crossbill
+Bullfinch
+Canary
+Island Canary
+Serin
+Siskin
+Pine Siskin
+Warbler
+Yellow Warbler
+Yellow-rumped Warbler
+Black-throated Blue Warbler
+Black-throated Green Warbler
+Prothonotary Warbler
+Cerulean Warbler
+Blackburnian Warbler
+Kirtland's Warbler
+Common Yellowthroat
+American Redstart
+Ovenbird
+Oriole
+Baltimore Oriole
+Bullock's Oriole
+Orchard Oriole
+Eurasian Golden Oriole
+Blackbird
+Red-winged Blackbird
+Yellow-headed Blackbird
+Brewer's Blackbird
+Grackle
+Common Grackle
+Boat-tailed Grackle
+Cowbird
+Brown-headed Cowbird
+Meadowlark
+Eastern Meadowlark
+Western Meadowlark
+Saltwater Crocodile
+Nile Crocodile
+American Crocodile
+Mugger Crocodile
+Siamese Crocodile
+Cuban Crocodile
+Dwarf Crocodile
+Orinoco Crocodile
+Freshwater Crocodile
+Morelet's Crocodile
+American Alligator
+Chinese Alligator
+Spectacled Caiman
+Black Caiman
+Broad-snouted Caiman
+Yacare Caiman
+Cuvier's Dwarf Caiman
+Gharial
+False Gharial
+Komodo Dragon
+Water Monitor
+Asian Water Monitor
+Nile Monitor
+Savannah Monitor
+Perentie
+Lace Monitor
+Gould's Monitor
+Emerald Tree Monitor
+Green Iguana
+Marine Iguana
+Desert Iguana
+Rhinoceros Iguana
+Fiji Banded Iguana
+Galapagos Land Iguana
+Chuckwalla
+Spiny-tailed Iguana
+Chameleon
+Veiled Chameleon
+Panther Chameleon
+Jackson's Chameleon
+Parson's Chameleon
+Pygmy Chameleon
+Labord's Chameleon
+Gekko
+Tokay Gecko
+Leopard Gecko
+Crested Gecko
+Day Gecko
+Mourning Gecko
+Flying Gecko
+Mediterranean House Gecko
+Satanic Leaf-tailed Gecko
+Mossy Leaf-tailed Gecko
+Bearded Dragon
+Central Bearded Dragon
+Frilled Lizard
+Thorny Devil
+Gila Monster
+Mexican Beaded Lizard
+Skink
+Blue-tongued Skink
+Five-lined Skink
+Broad-headed Skink
+Shingleback Skink
+Solomon Islands Skink
+Anole
+Green Anole
+Brown Anole
+Anolis
+Basilisk
+Plumed Basilisk
+Common Basilisk
+Red-headed Agama
+Hardun
+Slow Worm
+Glass Lizard
+Tuatara
+Green Sea Turtle
+Loggerhead Sea Turtle
+Hawksbill Sea Turtle
+Leatherback Sea Turtle
+Olive Ridley Sea Turtle
+Kemp's Ridley Sea Turtle
+Flatback Sea Turtle
+Galapagos Giant Tortoise
+Aldabra Giant Tortoise
+African Spurred Tortoise
+Leopard Tortoise
+Radiated Tortoise
+Gopher Tortoise
+Desert Tortoise
+Russian Tortoise
+Greek Tortoise
+Hermann's Tortoise
+Red-eared Slider
+Painted Turtle
+Snapping Turtle
+Alligator Snapping Turtle
+Matamata
+Pig-nosed Turtle
+Softshell Turtle
+Spiny Softshell Turtle
+Box Turtle
+Eastern Box Turtle
+Ornate Box Turtle
