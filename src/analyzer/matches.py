@@ -1,6 +1,10 @@
-from difflib import SequenceMatcher
-from data.analysis.registry import get_paths
 import unicodedata
+from data.analysis.registry import get_datasets, resolve_path
+from domain.scanner import ScanType
+from domain.dataset import Category
+from difflib import SequenceMatcher
+from dataclasses import dataclass
+from typing import overload
 
 _CACHE = {}
 
@@ -21,11 +25,10 @@ def load_base(path):
                 _CACHE[path] = set(f.read().split("\n"))
         return _CACHE[path]
 
-def find_exactly(password: str, path: str, base_category: str) -> tuple[int, dict]:
+def find_exactly(password: str, path: str, scan_type: ScanType) -> tuple[int, dict]:
     matches, counter = {
         "matches"  : [],
-        "category" : [],
-        "severity" : []
+        "severity" : [],
     }, 0
     
     try:
@@ -80,15 +83,12 @@ def find_exactly(password: str, path: str, base_category: str) -> tuple[int, dic
         elif nor_password in nor_word or nor_word in nor_password:
             apply_match(60 * (len(password) * 0.08))
         
-        elif len(password) > 4: 
+        elif len(password) > 4 and ScanType.value == "sequence": 
             score = match_analyzer(password, word)
             score_nor = match_analyzer(nor_password, nor_word)
             
             if score: apply_match(score * 1.2)
             elif score_nor: apply_match(score_nor)
-        
-    if counter:
-        matches["category"].append(base_category)
         
     if matches["severity"] != []:
         severity = sum(matches["severity"]) / len(matches["severity"])
@@ -96,11 +96,11 @@ def find_exactly(password: str, path: str, base_category: str) -> tuple[int, dic
     
     return counter, matches
 
-def scan_matches(password: str) -> dict:
-    paths, finds, severity = get_paths(), list(), list()
+def scan_matches(password: str, scan_category: Category, scan_type: ScanType) -> dict:
+    datasets, finds, severity = get_datasets(scan_category), list(), list()
     
-    for category, path in paths.items():
-        scan = find_exactly(password, path, category)
+    for dataset in datasets:
+        scan = find_exactly(password, resolve_path(dataset), scan_type)
         if tuple(scan[1].values())[0] != []:
             severity.append(scan[1]["severity"])
             finds.append(scan)
@@ -114,3 +114,18 @@ def scan_matches(password: str) -> dict:
     }
     
     return answer
+
+@dataclass
+class MatchAnalizer:
+    severity: float
+    matches:  dict
+    
+    def __init__(self, password):
+        matches = scan_matches(password)
+        
+        self.severity = matches["severity"]
+        self.matches  = matches["finds"]
+    
+@overload
+def scan_matches(password: MatchAnalizer):
+    return scan_matches(password)
