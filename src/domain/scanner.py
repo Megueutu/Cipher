@@ -4,6 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class ScanType(Enum):
     COMPLETE = "complete"
+    REGULAR  = "regular"
     SEQUENCE = "sequence"
     PATTERN  = "pattern"
     ALIKE    = "alike"
