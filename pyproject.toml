@@ -3,8 +3,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pswrd"
+name = "cipher"
 version = "0.1.0"
 
 [project.scripts]
-password-analyzer = "pswrd.cli:main"
+password-analyzer = "cipher.cli:main"
