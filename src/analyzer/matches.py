@@ -1,10 +1,10 @@
-import unicodedata
 from data.analysis.registry import get_datasets, resolve_path
 from domain.scanner import ScanType
 from domain.dataset import Category
 from difflib import SequenceMatcher
 from dataclasses import dataclass
 from typing import overload
+from scanner import scan
 
 _CACHE = {}
 
@@ -15,9 +15,6 @@ def _severity_analyzer(severity: int) -> tuple[bool, str]:
     elif severity > 30: return "Unprotected; risky password, should improve"
     elif severity > 10: return "Unprotected; very high risk, should improve"
     return "Unprotected; dangerous password, needs to improve"
-
-def _normalize(word: str) -> str:
-    return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
 
 def load_base(path):
         if path not in _CACHE:
@@ -67,29 +64,29 @@ def find_exactly(password: str, path: str, scan_type: ScanType) -> tuple[int, di
 
         return round(sequence_match() / smal * 10, 2)
     
-    nor_password = _normalize(password)
-    for word in base:
-        nor_word = _normalize(word)
+    # nor_password = _normalize(password)
+    # for word in base:
+    #     nor_word = _normalize(word)
         
-        if password == word:
-            apply_match(100)
+    #     if password == word:
+    #         apply_match(100)
         
-        elif password.lower() == word.lower().strip():
-            apply_match(90 * (len(password) * 0.08))
+    #     elif password.lower() == word.lower().strip():
+    #         apply_match(90 * (len(password) * 0.08))
         
-        elif nor_password == nor_word:
-            apply_match(80 * (len(password) * 0.08))
+    #     elif nor_password == nor_word:
+    #         apply_match(80 * (len(password) * 0.08))
         
-        elif nor_password in nor_word or nor_word in nor_password:
-            apply_match(60 * (len(password) * 0.08))
+    #     elif nor_password in nor_word or nor_word in nor_password:
+    #         apply_match(60 * (len(password) * 0.08))
         
-        elif len(password) > 4 and ScanType.value == "sequence": 
-            score = match_analyzer(password, word)
-            score_nor = match_analyzer(nor_password, nor_word)
+    #     elif len(password) > 4 and ScanType.value == "sequence": 
+    #         score = match_analyzer(password, word)
+    #         score_nor = match_analyzer(nor_password, nor_word)
             
-            if score: apply_match(score * 1.2)
-            elif score_nor: apply_match(score_nor)
-        
+    #         if score: apply_match(score * 1.2)
+    #         elif score_nor: apply_match(score_nor)
+            
     if matches["severity"] != []:
         severity = sum(matches["severity"]) / len(matches["severity"])
         matches["severity"] = severity

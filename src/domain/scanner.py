@@ -1,7 +1,16 @@
+from enum import Enum
 from dataclasses import dataclass
+
+@dataclass
+class ScanType(Enum):
+    COMPLETE = "complete"
+    SEQUENCE = "sequence"
+    PATTERN  = "pattern"
+    ALIKE    = "alike"
 
 @dataclass
 class Finds():
     sequence:  bool
     pattern:   bool
     blacklist: bool
+    
