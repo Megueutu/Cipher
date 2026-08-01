@@ -1,10 +1,9 @@
-from data.analysis.registry import get_datasets, resolve_path
-from domain.scanner import ScanType
-from domain.dataset import Category
-from difflib import SequenceMatcher
+from data.registry import get_datasets, resolve_path
+from src.domain.scanner import ScanType
+from src.domain.dataset import Category
+from src.analyzer.scanner import scan
 from dataclasses import dataclass
 from typing import overload
-from scanner import scan
 
 _CACHE = {}
 
@@ -71,6 +70,5 @@ class MatchAnalizer:
         self.severity = matches["severity"]
         self.matches  = matches["finds"]
     
-@overload
-def scan_matches(password: MatchAnalizer):
-    return scan_matches(password)
+# def scan_matches(password: MatchAnalizer):
+#     return scan_matches(password)
