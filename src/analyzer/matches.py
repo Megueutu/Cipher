@@ -23,10 +23,10 @@ def load_base(path):
         return _CACHE[path]
 
 def find_exactly(password: str, path: str, scan_type: ScanType) -> tuple[int, dict]:
-    matches, counter = {
+    matches = {
         "matches"  : [],
         "severity" : [],
-    }, 0
+    }
     
     try:
         base = load_base(path)
@@ -34,64 +34,12 @@ def find_exactly(password: str, path: str, scan_type: ScanType) -> tuple[int, di
     except FileNotFoundError:
         return -1
     
-    def apply_match(value: int):
-        nonlocal counter
-        nonlocal matches
-        
-        counter += 1
-        matches["matches"].append(word)
-        matches["severity"].append(value)
-    
-    def match_analyzer(str1, str2) -> float:
-        smal = min(len(str1), len(str2))
-        
-        def sequence_match() -> int:
-            nonlocal str1
-            nonlocal str2
-            
-            if abs(len(str1) - len(str2)) > 3: return 0
-            
-            matcher = SequenceMatcher(None, str1, str2)
-            match = matcher.find_longest_match(0, len(str1), 0, len(str2))
-            
-            nonlocal smal
-            limit_n = 4
-            
-            if smal < limit_n: return match.size if match.size == smal else 0
-            if match.size < limit_n: return 0
-            
-            return 0 if match.size < smal * 0.8 else match.size
+    scann = scan(password, base, scan_type)
 
-        return round(sequence_match() / smal * 10, 2)
+    matches["matches"].append(scann["matches"])
+    matches["severity"].append(scann["score"])
     
-    # nor_password = _normalize(password)
-    # for word in base:
-    #     nor_word = _normalize(word)
-        
-    #     if password == word:
-    #         apply_match(100)
-        
-    #     elif password.lower() == word.lower().strip():
-    #         apply_match(90 * (len(password) * 0.08))
-        
-    #     elif nor_password == nor_word:
-    #         apply_match(80 * (len(password) * 0.08))
-        
-    #     elif nor_password in nor_word or nor_word in nor_password:
-    #         apply_match(60 * (len(password) * 0.08))
-        
-    #     elif len(password) > 4 and ScanType.value == "sequence": 
-    #         score = match_analyzer(password, word)
-    #         score_nor = match_analyzer(nor_password, nor_word)
-            
-    #         if score: apply_match(score * 1.2)
-    #         elif score_nor: apply_match(score_nor)
-            
-    if matches["severity"] != []:
-        severity = sum(matches["severity"]) / len(matches["severity"])
-        matches["severity"] = severity
-    
-    return counter, matches
+    return len(scann["matches"]), matches
 
 def scan_matches(password: str, scan_category: Category, scan_type: ScanType) -> dict:
     datasets, finds, severity = get_datasets(scan_category), list(), list()
