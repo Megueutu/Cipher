@@ -1,37 +1,46 @@
 import unicodedata
 from src.domain.scanner import ScanType
+from src.domain.dataset import Dataset
 from difflib import SequenceMatcher
 from src.analyzer.translator import translate_password
 
 def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
 
-def scan(password: str, base: list, scan_type: ScanType) -> dict:
-    acc, words = 0, {}
+def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> dict:
+    acc, words = 0, list()
     nor_password = _normalize(password)
     amp = max(0.5, min(2.0, 7 / len(password)))
 
-    def scan_regular() -> None:
+    result = {
+        "score" : None,
+        "matches" : None
+    }
+
+    def scan_regular(word: str, nor_word: str) -> None:
+        nonlocal dataset
         nonlocal words
         nonlocal acc
 
         if password.lower() == word.lower():
             acc += 100
-            words.add((word, ScanType.REGULAR))
+            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename})
 
         elif nor_password == nor_word:
             acc += 80 * amp
-            words.add((word, ScanType.REGULAR))
+            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename})
     
-    def scan_sequence() -> None:
+    def scan_sequence(word: str, nor_word: str) -> None:
+        nonlocal dataset
         nonlocal words
         nonlocal acc
 
         if nor_password in nor_word or nor_word in nor_password:
             acc += 60 * amp
-            words.add((word, ScanType.SEQUENCE))
+            words.append({"word" : word, "scan_type" : ScanType.SEQUENCE.value, "dataset" : dataset.filename})
 
-    def scan_pattern() -> None:
+    def scan_pattern(word: str, nor_word: str) -> None:
+        nonlocal dataset
         nonlocal words
         nonlocal acc
 
@@ -59,36 +68,36 @@ def scan(password: str, base: list, scan_type: ScanType) -> dict:
 
         if score > 0:
             acc += score * 60 * amp
-            words.append(word)
+            words.append({"word" : word, "scan_type" : ScanType.PATTERN.value, "dataset" : dataset.filename})
 
-    def scan_alike() -> None:
+    def scan_alike(word: str, nor_word: str) -> None:
+        nonlocal dataset
         nonlocal words
         nonlocal acc
 
         if (translate_password(nor_password) == translate_password(nor_word)):
             acc += 60 * amp
-            words.add((word, ScanType.ALIKE))
+            words.append({"word" : word, "scan_type" : ScanType.ALIKE.value, "dataset" : dataset.filename})
     
     for word in base:
         nor_word = _normalize(word)
 
-        scan_regular()
+        scan_regular(word, nor_word)
         match scan_type:
             case ScanType.COMPLETE:
-                scan_sequence()
-                scan_pattern()
-                scan_alike()
+                scan_sequence(word, nor_word)
+                scan_pattern(word, nor_word)
+                scan_alike(word, nor_word)
             
             case ScanType.SEQUENCE:
-                scan_sequence()
+                scan_sequence(word, nor_word)
             
             case ScanType.PATTERN:
-                scan_pattern()
+                scan_pattern(word, nor_word)
             
             case ScanType.ALIKE:
-                scan_alike()
+                scan_alike(word, nor_word)
 
-    return {
-        "score" : acc,
-        "matches" : words
-    }
+    result["score"], result["matches"] = acc, words if words != set() else None
+
+    return result
