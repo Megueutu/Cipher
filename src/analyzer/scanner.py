@@ -2,7 +2,7 @@ import unicodedata
 from src.domain.scanner import ScanType
 from src.domain.dataset import Dataset
 from difflib import SequenceMatcher
-from src.analyzer.translator import translate_password
+from src.analyzer.translator import translate_password, translate_candidates
 
 def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
