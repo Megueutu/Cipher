@@ -12,11 +12,15 @@ def load_registry() -> dict:
     with open(REGISTRY_PATH, "r", encoding="utf-8") as file:
         return json.load(file)
 
-def get_datasets(basetype: BaseType) -> list[Dataset]:
+def get_datasets(base_category: Category = None, basetype: BaseType = None) -> list[Dataset]:
     registry, datasets = load_registry(), []
 
     for str_category, files in registry["datasets"].items():
         category = Category(str_category)
+
+        if not category == base_category and base_category:
+            continue
+
         for item in files:
             inferred_basetype = _infer_basetype(item["file"])
 
@@ -29,7 +33,7 @@ def get_datasets(basetype: BaseType) -> list[Dataset]:
     return datasets
 
 def resolve_path(dataset: Dataset) -> Path:
-    path = (DATA_PATH / dataset.basetype.value / dataset.category.value / dataset.filename)
+    path = (DATA_PATH / dataset.category.value / dataset.filename)
 
     if not path.exists():
         raise FileNotFoundError(f"Dataset not found: {path}")
