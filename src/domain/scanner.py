@@ -1,7 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass
 
-@dataclass
 class ScanType(Enum):
     COMPLETE = "complete"
     REGULAR  = "regular"
