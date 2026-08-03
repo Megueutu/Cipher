@@ -70,24 +70,26 @@ _ALL_PATTERNS: list[tuple[str, tuple[str, ...]]] = sorted(
     key=lambda item: -len(item[0]),
 )
 
-def translate_password(password: str) -> str:
-    result: list[str] = []
-    i, n = 0, len(password)
+def translate_password(password: str, counter: bool = False) -> str | tuple[str, int]:
+    result: list[str] = list()
+    c, i, n = 0, 0, len(password)
     while i < n:
         for pattern, letters in _ALL_PATTERNS:
             L = len(pattern)
             if password[i:i + L] == pattern:
                 result.append(letters[0])
+                c += 1
                 i += L
                 break
         else:
             result.append(password[i])
+            c += 1
             i += 1
-    return "".join(result)
+    return ("".join(result), c) if counter else "".join(result)
 
 def translate_candidates(password: str, limit: int = 200) -> list[str]:
     n = len(password)
-    results: list[str] = []
+    results: list[str] = list()
 
     def dfs(i: int, built: list[str]) -> None:
         if len(results) >= limit:
