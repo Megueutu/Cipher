@@ -33,7 +33,7 @@ def calculate_entropy(password: str) -> float:
     return log2(pool**len(password))
 
 def check_entropy(bits: int) -> str:
-    if bits < 28:    return "Very Weak; might keep out family members"
+    if   bits < 28:  return "Very Weak; might keep out family members"
     elif bits < 36:  return "Weak; should keep out most people, often good for desktop login passwords"
     elif bits < 60:  return "Reasonable; fairly secure passwords for network and company passwords"
     elif bits < 128: return "Strong; can be good for guarding financial information"
