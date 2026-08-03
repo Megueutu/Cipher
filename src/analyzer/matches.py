@@ -31,7 +31,6 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
     matches = {
         "matches"  : [],
         "severity" : [],
-        "attempts" : 0
     }
     
     try:
@@ -44,7 +43,6 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
 
     matches["matches"].append(scann["matches"])
     matches["severity"].append(scann["score"])
-    matches["attempts"] += scann["attempts"]
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
@@ -53,7 +51,7 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     
     if password is None: raise ValueError("No password were given as a parameter")
 
-    finds, severity, attempts = list(), list(), 0
+    finds, severity = list(), list()
     
     if not path is None and isinstance(path, (str, Path)):
         raise TypeError("Path need to be a Path or str")
@@ -78,8 +76,6 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
             "severity"    : f"{round(sum(scan[1]["severity"]), 2)}%"
         }
         
-        attempts += scan[1]["attempts"]
-
         if format_scan["words_found"] > 0:
             severity.append(scan[1]["severity"])
             finds.append(format_scan)
@@ -91,7 +87,6 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
         "unprotected" : True if sum(k["words_found"] for k in finds) else False,
         "severity"    : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
         "finds"       : finds if finds else None,
-        "attempts"    : attempts
     }
     
     return (answer, datasets) if statistic else answer
