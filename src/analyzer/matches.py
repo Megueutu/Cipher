@@ -18,7 +18,7 @@ def _severity_analyzer(severity: int) -> tuple[bool, str]:
 
 def load_base(path):
         if path not in _CACHE:
-            with open(path) as f:
+            with open(path, encoding="utf-8") as f:
                 _CACHE[path] = set(f.read().split("\n"))
         return _CACHE[path]
 
@@ -60,12 +60,12 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
             finds.append(format_scan)
 
     severity = [i for sub in severity for i in sub]
-    pct_severity = round(sum(severity) / len(severity), 2)
+    pct_severity = round(sum(severity) / max(len(severity), 1), 2)
 
     answer = {
         "unprotected" : True if sum(k["words_found"] for k in finds) else False,
         "severity"    : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
-        "finds"       : finds,
+        "finds"       : finds if finds != [] else None,
     }
     
     return answer
