@@ -75,7 +75,7 @@ def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> di
         nonlocal words
         nonlocal acc
 
-        if (translate_password(nor_password) == translate_password(nor_word)):
+        if translate_password(nor_word) in translate_candidates(nor_password):
             acc += 60 * amp
             words.append({"word" : word, "scan_type" : ScanType.ALIKE.value, "dataset" : dataset.filename})
     
