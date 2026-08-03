@@ -20,28 +20,31 @@ def _severity_analyzer(severity: float) -> str:
     elif severity <= 90: return "Very high risk, needs to improve"
     return "Unprotected; dangerous password, needs to improve"
 
-def load_base(path):
-        if path not in _CACHE:
-            with open(path, encoding="utf-8") as f:
-                _CACHE[path] = set(f.read().split("\n"))
-        return _CACHE[path]
+def load_base(path: Path) -> list[str]:
+    if path not in _CACHE:
+        with open(path, encoding="utf-8") as file:
+            _CACHE[path] = [line.strip() for line in file if line.strip()]
+            
+    return _CACHE[path]
 
 def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[int, dict]:
     matches = {
         "matches"  : [],
         "severity" : [],
+        "attempts" : 0
     }
     
     try:
-        base = load_base(resolve_path(dataset))
+        base = load_base(path=resolve_path(dataset))
     
     except FileNotFoundError:
         return -1
     
-    scann = scan(password, base, scan_type, dataset)
+    scann = scan(password=password, base=base, scan_type=scan_type, dataset=dataset)
 
     matches["matches"].append(scann["matches"])
     matches["severity"].append(scann["score"])
+    matches["attempts"] += scann["attempts"]
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
@@ -50,7 +53,7 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     
     if password is None: raise ValueError("No password were given as a parameter")
 
-    finds, severity = list(), list()
+    finds, severity, attempts = list(), list(), 0
     
     if not path is None and isinstance(path, (str, Path)):
         raise TypeError("Path need to be a Path or str")
@@ -74,6 +77,8 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
             "matches"     : scan[1]["matches"],
             "severity"    : f"{round(sum(scan[1]["severity"]), 2)}%"
         }
+        
+        attempts += scan[1]["attempts"]
 
         if format_scan["words_found"] > 0:
             severity.append(scan[1]["severity"])
@@ -83,9 +88,10 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     pct_severity = round(sum(severity) / max(len(severity), 1), 2)
 
     answer = {
-        "unprotected"    : True if sum(k["words_found"] for k in finds) else False,
-        "severity"       : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
-        "finds"          : finds if finds != [] else None
+        "unprotected" : True if sum(k["words_found"] for k in finds) else False,
+        "severity"    : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
+        "finds"       : finds if finds else None,
+        "attempts"    : attempts
     }
     
-    return answer, datasets if statistic else {}
+    return (answer, datasets) if statistic else answer
