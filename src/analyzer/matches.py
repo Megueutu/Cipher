@@ -3,17 +3,20 @@ from src.domain.scanner import ScanType
 from src.domain.dataset import Category, Dataset
 from src.analyzer.scanner import scan
 from dataclasses import dataclass
-from typing import overload
 
 _CACHE = {}
 
-def _severity_analyzer(severity: int) -> tuple[bool, str]:
-    if severity   <= 0: return "No risk detected"
-    elif severity >  0: return "Very low risk"
-    elif severity > 20: return "Low risk"
-    elif severity > 50: return "Average risk, should improve"
-    elif severity > 80: return "Risky password, should improve"
-    elif severity > 90: return "Very high risk, should improve"
+def _severity_analyzer(severity: float) -> str:
+    if   severity <=  0: return "No risk detected"
+    elif severity <= 10: return "Very low risk"
+    elif severity <= 20: return "Low risk"
+    elif severity <= 30: return "Moderately low risk"
+    elif severity <= 40: return "Moderate risk"
+    elif severity <= 50: return "Moderately high risk, should improve"
+    elif severity <= 60: return "Average risk, should improve"
+    elif severity <= 70: return "High risk, should improve"
+    elif severity <= 80: return "Risky password, needs to improve"
+    elif severity <= 90: return "Very high risk, needs to improve"
     return "Unprotected; dangerous password, needs to improve"
 
 def load_base(path):
@@ -41,11 +44,19 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
-def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE) -> dict:
-    datasets, finds, severity = get_datasets(scan_category), list(), list()
+def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE, dataset: Dataset | list[Dataset] = None) -> dict:
+    if password is None: raise ValueError("No password were passed as a parameter")
 
+    finds, severity = list(), list()
+    
+    if dataset is None: datasets = get_datasets(scan_category)
+    elif type(dataset) == type(list()): datasets == dataset
+    else: datasets = [dataset]
+    
     if datasets == []:
-        raise TypeError(f"No datasets were founded with this category: {scan_category}")
+        if scan_category:
+            raise TypeError(f"No datasets were founded with this category: {scan_category}")
+        raise ValueError(f"No datasets were passed as a parameter")
 
     for dataset in datasets:
         scan = find_exactly(password, dataset, scan_type)
@@ -69,17 +80,3 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     }
     
     return answer
-
-@dataclass
-class MatchAnalizer:
-    severity: float
-    matches:  dict
-    
-    def __init__(self, password):
-        matches = scan_matches(password)
-        
-        self.severity = matches["severity"]
-        self.matches  = matches["finds"]
-    
-# def scan_matches(password: MatchAnalizer):
-#     return scan_matches(password)
