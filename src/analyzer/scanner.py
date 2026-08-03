@@ -1,6 +1,6 @@
 import unicodedata
 from src.domain.scanner import ScanType
-from src.domain.dataset import Dataset
+from src.domain.dataset import Dataset, Category
 from difflib import SequenceMatcher
 from src.analyzer.translator import translate_password, translate_candidates
 
@@ -8,41 +8,65 @@ def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
 
 def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> dict:
-    acc, words = 0, list()
+    acc, attempts, words = 0, 0, list()
     nor_password = _normalize(password)
     amp = max(0.5, min(2.0, 7 / len(password)))
 
     result = {
-        "score" : None,
-        "matches" : None
+        "score"    : None,
+        "matches"  : None,
+        "attempts" : 0,
     }
+    
+    def global_attempts() -> None:
+        nonlocal result
+        result["attempts"] += 1
 
-    def scan_regular(word: str, nor_word: str) -> None:
+    def internal_attempts() -> int:
+        nonlocal attempts
+        return attempts
+
+    def scan_regular(word: str, nor_word: str) -> bool:
         nonlocal dataset
         nonlocal words
         nonlocal acc
+
+        global_attempts()
 
         if password.lower() == word.lower():
             acc += 100
-            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename})
+            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename, "attempts" : internal_attempts()})
+            return True
 
         elif nor_password == nor_word:
             acc += 80 * amp
-            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename})
+            words.append({"word" : word, "scan_type" : ScanType.REGULAR.value, "dataset" : dataset.filename, "attempts" : internal_attempts()})
+            return True
+
+        return False
     
-    def scan_sequence(word: str, nor_word: str) -> None:
+    def scan_sequence(word: str, nor_word: str) -> bool:
+        nonlocal attempts
         nonlocal dataset
         nonlocal words
         nonlocal acc
+        
+        global_attempts()
 
         if nor_password in nor_word or nor_word in nor_password:
             acc += 60 * amp
-            words.append({"word" : word, "scan_type" : ScanType.SEQUENCE.value, "dataset" : dataset.filename})
+            words.append({"word" : word, "scan_type" : ScanType.SEQUENCE.value, "dataset" : dataset.filename, "attempts" : internal_attempts()})
+            return True
+        
+        return False
 
-    def scan_pattern(word: str, nor_word: str) -> None:
+    def scan_pattern(word: str, nor_word: str) -> bool:
+        nonlocal attempts
         nonlocal dataset
         nonlocal words
         nonlocal acc
+        
+        global_attempts()
 
         def match_analyzer(str1: str, str2: str) -> float:
             smal = min(len(str1), len(str2))
@@ -68,35 +92,45 @@ def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> di
 
         if score > 0:
             acc += score * 60 * amp
-            words.append({"word" : word, "scan_type" : ScanType.PATTERN.value, "dataset" : dataset.filename})
+            words.append({"word" : word, "scan_type" : ScanType.PATTERN.value, "dataset" : dataset.filename, "attempts" : internal_attempts()})
+            return True
+        
+        return False
 
-    def scan_alike(word: str, nor_word: str) -> None:
+    def scan_alike(word: str, nor_word: str) -> bool:
+        nonlocal attempts
         nonlocal dataset
         nonlocal words
         nonlocal acc
 
+        global_attempts()
+        
         if translate_password(nor_word) in translate_candidates(nor_password):
             acc += 60 * amp
-            words.append({"word" : word, "scan_type" : ScanType.ALIKE.value, "dataset" : dataset.filename})
+            words.append({"word" : word, "scan_type" : ScanType.ALIKE.value, "dataset" : dataset.filename, "attempts" : internal_attempts()})
+            return True
+        
+        return False
     
     for word in base:
         nor_word = _normalize(word)
+        attempts += 1
 
-        scan_regular(word, nor_word)
+        if scan_regular(word, nor_word): continue
         match scan_type:
             case ScanType.COMPLETE:
-                scan_sequence(word, nor_word)
-                scan_pattern(word, nor_word)
-                scan_alike(word, nor_word)
+                if scan_sequence(word, nor_word): continue
+                if scan_pattern(word, nor_word):  continue
+                if scan_alike(word, nor_word):    continue
             
             case ScanType.SEQUENCE:
-                scan_sequence(word, nor_word)
+                if scan_sequence(word, nor_word): continue
             
             case ScanType.PATTERN:
-                scan_pattern(word, nor_word)
+                if scan_pattern(word, nor_word): continue
             
             case ScanType.ALIKE:
-                scan_alike(word, nor_word)
+                if scan_alike(word, nor_word): continue
 
     result["score"], result["matches"] = acc, words if words != set() else None
 
