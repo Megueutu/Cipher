@@ -45,12 +45,14 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
-def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE, dataset: Dataset | list[Dataset] = None, path: Path | str = None) -> dict:
+def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE,
+    dataset: Dataset | list[Dataset] = None, path: Path | str = None, statistic: bool = False) -> dict:
+    
     if password is None: raise ValueError("No password were given as a parameter")
 
     finds, severity = list(), list()
     
-    if not isinstance(path, (str, Path)):
+    if not path is None and isinstance(path, (str, Path)):
         raise TypeError("Path need to be a Path or str")
         
     if path and type(path) is str:
@@ -60,7 +62,7 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     elif type(dataset) == type(list()): datasets == dataset
     else: datasets = [dataset]
     
-    if datasets == []:
+    if not datasets:
         if scan_category:
             raise TypeError(f"No datasets were founded with this category: {scan_category}")
         raise ValueError(f"No datasets were given as a parameter")
@@ -81,9 +83,9 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     pct_severity = round(sum(severity) / max(len(severity), 1), 2)
 
     answer = {
-        "unprotected" : True if sum(k["words_found"] for k in finds) else False,
-        "severity"    : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
-        "finds"       : finds if finds != [] else None,
+        "unprotected"    : True if sum(k["words_found"] for k in finds) else False,
+        "severity"       : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
+        "finds"          : finds if finds != [] else None
     }
     
-    return answer
+    return answer, datasets if statistic else {}

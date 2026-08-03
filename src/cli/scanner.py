@@ -1,5 +1,6 @@
 import argparse
 from argparse import ArgumentParser
+from src.analyzer.statistics import measure
 from src.analyzer.matches import scan_matches
 from src.domain.dataset import Category, Dataset
 from src.domain.scanner import ScanType
@@ -52,9 +53,17 @@ def _parser() -> ArgumentParser:
     
     group.add_argument(
         "-dl", "--dataset-list",
-        dest="dataset",
+        dest="datasets",
         nargs="+",
         help="Path to a custom dataset for analyszis"
+    )
+    
+    group.add_argument(
+        "-s", "--statistics",
+        dest="stats",
+        default=False,
+        action="store_true",
+        help="Metrify"
     )
 
     return parser.parse_args()
@@ -63,9 +72,11 @@ def _parser() -> ArgumentParser:
 def scanner_parser() -> None:
     parser = _parser()
     
-    try:
+    if parser.stats:
+        scann = measure(scan_matches, password=parser.password, scan_category=parser.category, scan_type=parser.scantype, dataset=parser.dataset, statistic=True)
+    
+    else:
         scann = scan_matches(password=parser.password, scan_category=parser.category, scan_type=parser.scantype, dataset=parser.dataset)
-        print(scann)
+    
+    print(scann)
         
-    except TypeError:
-        print("Ocorreu um erro")
