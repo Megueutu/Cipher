@@ -1,3 +1,4 @@
+from pathlib import Path
 from data.registry import get_datasets, resolve_path
 from src.domain.scanner import ScanType
 from src.domain.dataset import Category, Dataset
@@ -44,11 +45,17 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
-def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE, dataset: Dataset | list[Dataset] = None) -> dict:
-    if password is None: raise ValueError("No password were passed as a parameter")
+def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE, dataset: Dataset | list[Dataset] = None, path: Path | str = None) -> dict:
+    if password is None: raise ValueError("No password were given as a parameter")
 
     finds, severity = list(), list()
     
+    if not isinstance(path, (str, Path)):
+        raise TypeError("Path need to be a Path or str")
+        
+    if path and type(path) is str:
+        Path.parser(path)
+            
     if dataset is None: datasets = get_datasets(scan_category)
     elif type(dataset) == type(list()): datasets == dataset
     else: datasets = [dataset]
@@ -56,7 +63,7 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
     if datasets == []:
         if scan_category:
             raise TypeError(f"No datasets were founded with this category: {scan_category}")
-        raise ValueError(f"No datasets were passed as a parameter")
+        raise ValueError(f"No datasets were given as a parameter")
 
     for dataset in datasets:
         scan = find_exactly(password, dataset, scan_type)

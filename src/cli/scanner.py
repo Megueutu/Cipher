@@ -6,7 +6,7 @@ from src.domain.scanner import ScanType
 from data.registry import resolve_path
 from pathlib import Path
 
-def scanner_parser() -> ArgumentParser:
+def _parser() -> ArgumentParser:
     parser = ArgumentParser(
         prog="scanner",
         description="Scanner for analyzing passwords."
@@ -19,6 +19,7 @@ def scanner_parser() -> ArgumentParser:
 
     parser.add_argument(
         "--scan-type", "-S",
+        dest="scantype",
         type=ScanType,
         default=ScanType.COMPLETE,
         choices=list(ScanType),
@@ -37,8 +38,34 @@ def scanner_parser() -> ArgumentParser:
 
     group.add_argument(
         "-p", "--path",
-        type=Path,
+        dest="path",
+        type=str,
+        help="Dataset path"
+    )
+
+    group.add_argument(
+        "-d", "--dataset",
+        dest="dataset",
+        type=str,
+        help="Dataset name located in \'data/analysis/\'"
+    )
+    
+    group.add_argument(
+        "-dl", "--dataset-list",
+        dest="dataset",
+        nargs="+",
         help="Path to a custom dataset for analyszis"
     )
 
     return parser.parse_args()
+
+
+def scanner_parser() -> None:
+    parser = _parser()
+    
+    try:
+        scann = scan_matches(password=parser.password, scan_category=parser.category, scan_type=parser.scantype, dataset=parser.dataset)
+        print(scann)
+        
+    except TypeError:
+        print("Ocorreu um erro")
