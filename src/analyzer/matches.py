@@ -27,7 +27,7 @@ def load_base(path: Path) -> list[str]:
             
     return _CACHE[path]
 
-def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[int, dict]:
+def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[ScanType], prioritize: ScanType | set[ScanType] = None) -> tuple[int, dict]:
     matches = {
         "matches"  : [],
         "severity" : [],
@@ -39,15 +39,16 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType) -> tuple[
     except FileNotFoundError:
         return -1
     
-    scann = scan(password=password, base=base, scan_type=scan_type, dataset=dataset)
+    scann = scan(password=password, base=base, scan_type=scan_type, dataset=dataset, prioritize=prioritize)
 
     matches["matches"].append(scann["matches"])
     matches["severity"].append(scann["score"])
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
-def scan_matches(password: str, scan_category: Category = None, scan_type: ScanType = ScanType.COMPLETE,
-    dataset: Dataset | list[Dataset] = None, path: Path | str = None, statistic: bool = False) -> dict:
+def scan_matches(password: str, dataset: Dataset | list[Dataset] = None, path: Path | str = None,
+    scan_category: Category = None, scan_type: ScanType | list[ScanType] = ScanType.COMPLETE, prioritize: ScanType | set[ScanType] = None,
+    statistic: bool = False) -> dict:
     
     if password is None: raise ValueError("No password were given as a parameter")
 
@@ -69,7 +70,7 @@ def scan_matches(password: str, scan_category: Category = None, scan_type: ScanT
         raise ValueError(f"No datasets were given as a parameter")
 
     for dataset in datasets:
-        scan = find_exactly(password, dataset, scan_type)
+        scan = find_exactly(password=password, dataset=dataset, scan_type=scan_type, prioritize=prioritize)
         format_scan = {
             "words_found" : scan[0],
             "matches"     : scan[1]["matches"],
