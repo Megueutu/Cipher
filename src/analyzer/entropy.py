@@ -1,6 +1,7 @@
 import string
 from math import log2
 from src.analyzer.matches import scan_matches
+from src.domain.scanner import ScanType
 from src.domain.dataset import Category
 from src.domain.entropy import Entropy
 from src.analyzer.translator import translate_password
@@ -27,19 +28,20 @@ def _calculate_pool(password: str) -> int:
     
     return sum([i[0] for i in list(pool)])
 
-def calculate_entropy(password: str) -> Entropy:
+def calculate_entropy(password: str) -> float:
     pool = _calculate_pool(password)
     
-    scan, penalty = scan_matches(password=password), list()
+    scan, penalty = scan_matches(password=password, scan_category=Category.BLACKLIST, prioritize=ScanType.ALIKE), [1]
     
-    for i in [i for i in scan["finds"]]:
-        for j in i["matches"]:
-            for k in j:
-                penalty.append(k["attempts"])
+    if scan["finds"]:
+        for i in [i for i in scan["finds"]]:
+            for j in i["matches"]:
+                for k in j:
+                    penalty.append(k["attempts"])
+        
+        if not sum([i["words_found"] for i in scan["finds"]]) > 0: pool = 1
     
-    if not sum([i["words_found"] for i in scan["finds"]]) > 0: pool = 1
-    
-    Entropy(bits=log2(pool**len(password)), top_attempts=max(penalty),
+    entropy = Entropy(bits=log2(pool**len(password)), top_attempts=(min(penalty) * len(penalty)),
     leet_guesses=translate_password(password=password, counter=True)[1])
     
-    return Entropy
+    return entropy.bits * (1 / log2((entropy.top_attempts * entropy.leet_guesses) + 2))

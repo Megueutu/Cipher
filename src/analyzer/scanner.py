@@ -1,13 +1,18 @@
 import unicodedata
+from src.analyzer.translator import translate_password, translate_candidates
 from src.domain.scanner import ScanType
 from src.domain.dataset import Dataset, Category
 from difflib import SequenceMatcher
-from src.analyzer.translator import translate_password, translate_candidates
+from typing import Callable
 
 def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
 
-def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> dict:
+def scan(password: str, base: list, dataset: Dataset,
+    scan_type: ScanType | list[ScanType] = ScanType.COMPLETE, prioritize: ScanType | set[ScanType] = None) -> dict:
+    
+    if prioritize is ScanType.COMPLETE: raise TypeError("ScanType prioritizer cannot be COMPLETE")
+    
     acc, attempts, words = 0, 0, list()
     nor_password = _normalize(password)
     amp = max(0.5, min(2.0, 7 / len(password)))
@@ -112,25 +117,32 @@ def scan(password: str, base: list, scan_type: ScanType, dataset: Dataset) -> di
         
         return False
     
+    def _scann_order(scanners: dict[ScanType, Callable]) -> list[Callable]:
+        priorities: list[Callable] = list()
+        for i in list(prioritize) if type(prioritize) is set else [prioritize]:
+            if i in [scan_type] if type(scan_type) is ScanType else scan_type:
+                priorities.append(scanners[i])
+        
+        return priorities
+    
+    scanners: dict[ScanType, Callable[[str, str], bool]] = {
+        ScanType.SEQUENCE : scan_sequence,
+        ScanType.PATTERN  : scan_pattern,
+        ScanType.ALIKE    : scan_alike,
+    }
+    
+    defs: list[Callable[[str, str], bool]] = _scann_order(scanners=scanners)
+    
+    if prioritize: 
+        scanners = _scann_order(scanners=scanners)
+    
     for word in base:
         nor_word = _normalize(word)
         attempts += 1
 
         if scan_regular(word, nor_word): continue
-        match scan_type:
-            case ScanType.COMPLETE:
-                if scan_sequence(word, nor_word): continue
-                if scan_pattern(word, nor_word):  continue
-                if scan_alike(word, nor_word):    continue
-            
-            case ScanType.SEQUENCE:
-                if scan_sequence(word, nor_word): continue
-            
-            case ScanType.PATTERN:
-                if scan_pattern(word, nor_word): continue
-            
-            case ScanType.ALIKE:
-                if scan_alike(word, nor_word): continue
+        for fun in defs:
+            if fun(word, nor_word): break
 
     result["score"], result["matches"] = acc, words if words != set() else None
 
