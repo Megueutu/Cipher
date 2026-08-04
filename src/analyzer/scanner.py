@@ -1,27 +1,17 @@
 import unicodedata
 from difflib import SequenceMatcher, Match
-from typing  import Callable, TypedDict, Optional
+from typing  import Callable, Optional
 
 from src.analyzer.translator import translate_password, translate_candidates
 from src.domain.scanner import ScanType
-from src.domain.dataset import Dataset, Category
+from src.domain.dataset import Dataset
+from src.domain.models.scanner import ScannerFinds, ScannerResult
 
 def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
 
-class ScannerFinds(TypedDict):
-    word:      str
-    attempts:  int
-    dataset:   Dataset
-    scan_type: ScanType
-
-class ScannerResult(TypedDict):
-    matches:  Optional[list[ScannerFinds]]
-    score:    Optional[float]
-    attempts: int
-
 def scan(password: str, base: list, dataset: Dataset,
-    scan_type: ScanType | list[ScanType] = ScanType.COMPLETE, prioritize: ScanType | set[ScanType] = None) -> ScannerResult:
+    scan_type: ScanType | list[ScanType] = ScanType.COMPLETE, prioritize: Optional[ScanType | set[ScanType]] = None) -> ScannerResult:
     
     if prioritize is ScanType.COMPLETE: raise TypeError("ScanType prioritizer cannot be COMPLETE")
     

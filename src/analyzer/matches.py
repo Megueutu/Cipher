@@ -1,10 +1,11 @@
 from pathlib     import Path
-from dataclasses import dataclass
+from typing      import Optional
 
 from data.registry import get_datasets, resolve_path
 from src.domain.scanner   import ScanType
 from src.domain.dataset   import Category, Dataset
 from src.analyzer.scanner import scan
+from src.domain.models.matches import ScanMatches, FormatScan, Matches
 
 _CACHE = {}
 
@@ -28,8 +29,8 @@ def load_base(path: Path) -> list[str]:
             
     return _CACHE[path]
 
-def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[ScanType], prioritize: ScanType | set[ScanType] = None) -> tuple[int, dict]:
-    matches = {
+def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[ScanType], prioritize: Optional[ScanType | set[ScanType]] = None) -> tuple[int, dict]:
+    matches: Matches = {
         "matches"  : [],
         "severity" : [],
     }
@@ -47,20 +48,23 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[Sca
 
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
-def scan_matches(password: str, dataset: Dataset | list[Dataset] = None, path: Path | str = None,
-    scan_category: Category = None, scan_type: ScanType | list[ScanType] = ScanType.COMPLETE, prioritize: ScanType | set[ScanType] = None,
-    statistic: bool = False) -> dict:
+def scan_matches(password: str,
+    dataset: Optional[Dataset | list[Dataset]] = None, path: Optional[Path | str] = None,
+    scan_category: Optional[Category] = None, scan_type: ScanType | list[ScanType] = ScanType.COMPLETE,
+    prioritize: Optional[ScanType | set[ScanType]] = None, statistic: bool = False) -> ScanMatches | tuple[ScanMatches, list[Dataset]]:
     
     if password is None: raise ValueError("No password were given as a parameter")
 
-    finds, severity = list(), list()
+    finds:    list[FormatScan] = list()
+    severity: list[float] = list()
     
     if not path is None and isinstance(path, (str, Path)):
         raise TypeError("Path need to be a Path or str")
         
     if path and type(path) is str:
         Path.parser(path)
-            
+    
+    datasets: list[Dataset] 
     if dataset is None: datasets = get_datasets(scan_category)
     elif type(dataset) == type(list()): datasets == dataset
     else: datasets = [dataset]
@@ -71,23 +75,23 @@ def scan_matches(password: str, dataset: Dataset | list[Dataset] = None, path: P
         raise ValueError(f"No datasets were given as a parameter")
 
     for dataset in datasets:
-        scan = find_exactly(password=password, dataset=dataset, scan_type=scan_type, prioritize=prioritize)
-        format_scan = {
+        scan:  tuple[int, dict] = find_exactly(password=password, dataset=dataset, scan_type=scan_type, prioritize=prioritize)
+        format_scan: FormatScan = {
             "words_found" : scan[0],
             "matches"     : scan[1]["matches"],
-            "severity"    : f"{round(sum(scan[1]["severity"]), 2)}%"
+            "severity"    : {round(sum(scan[1]["severity"]), 2)}
         }
         
         if format_scan["words_found"] > 0:
             severity.append(scan[1]["severity"])
             finds.append(format_scan)
 
-    severity = [i for sub in severity for i in sub]
-    pct_severity = round(sum(severity) / max(len(severity), 1), 2)
+    severity: list[float] = [i for sub in severity for i in sub]
+    pctg_severity:  float = round(sum(severity) / max(len(severity), 1), 2)
 
-    answer = {
+    answer: ScanMatches = {
         "unprotected" : True if sum(k["words_found"] for k in finds) else False,
-        "severity"    : (f"{pct_severity}%", _severity_analyzer(pct_severity)),
+        "severity"    : {"percentage" : pctg_severity, "analysis" : _severity_analyzer(pctg_severity)},
         "finds"       : finds if finds else None,
     }
     
