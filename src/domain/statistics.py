@@ -1,5 +1,6 @@
-from src.domain.dataset import Dataset
 from dataclasses import dataclass
+
+from src.domain.dataset import Dataset
 
 @dataclass
 class ExecutionMeasure():

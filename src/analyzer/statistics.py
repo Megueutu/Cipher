@@ -1,4 +1,5 @@
 import time
+
 from src.domain.statistics import ExecutionMeasure
 
 def measure(func, *args, **kwargs) -> dict:

@@ -9,4 +9,4 @@ def guess_year(password: str) -> int:
             
     return c
 
-print(guess_year("1234. 152125.   15214124. 1231 23 12"))
+print(guess_year("password"))

@@ -1,6 +1,7 @@
-from entropy import calculate_entropy
-from matches import scan_matches, MatchAnalizer
 from dataclasses import dataclass
+
+from src.analyzer.entropy import calculate_entropy
+from src.analyzer.matches import scan_matches, MatchAnalizer
 
 @dataclass
 class PasswordAnalizer:

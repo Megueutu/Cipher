@@ -1,9 +1,10 @@
 import unicodedata
+from difflib import SequenceMatcher
+from typing  import Callable, TypedDict
+
 from src.analyzer.translator import translate_password, translate_candidates
 from src.domain.scanner import ScanType
 from src.domain.dataset import Dataset, Category
-from difflib import SequenceMatcher
-from typing import Callable
 
 def _normalize(word: str) -> str:
     return unicodedata.normalize("NFKD", word.lower().strip()).encode("ASCII", "ignore").decode("ASCII")
@@ -17,7 +18,7 @@ def scan(password: str, base: list, dataset: Dataset,
     nor_password = _normalize(password)
     amp = max(0.5, min(2.0, 7 / len(password)))
 
-    result = {
+    result: dict[str, int | None] = {
         "score"    : None,
         "matches"  : None,
         "attempts" : 0,

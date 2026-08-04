@@ -1,9 +1,10 @@
-from pathlib import Path
-from data.registry import get_datasets, resolve_path
-from src.domain.scanner import ScanType
-from src.domain.dataset import Category, Dataset
-from src.analyzer.scanner import scan
+from pathlib     import Path
 from dataclasses import dataclass
+
+from data.registry import get_datasets, resolve_path
+from src.domain.scanner   import ScanType
+from src.domain.dataset   import Category, Dataset
+from src.analyzer.scanner import scan
 
 _CACHE = {}
 
