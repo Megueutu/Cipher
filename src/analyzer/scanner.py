@@ -1,6 +1,6 @@
 import unicodedata
 from difflib import SequenceMatcher, Match
-from typing  import Callable, Optional
+from typing import Callable, Optional
 
 from src.analyzer.translator import translate_password, translate_candidates
 from src.domain.scanner import ScanType

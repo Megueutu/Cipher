@@ -2,7 +2,7 @@ import string
 from math import log2
 
 from src.analyzer.translator import translate_password
-from src.analyzer.matches    import scan_matches
+from src.analyzer.matches import scan_matches
 from src.domain.scanner import ScanType
 from src.domain.dataset import Category
 from src.domain.entropy import Entropy

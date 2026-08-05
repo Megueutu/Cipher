@@ -1,9 +1,9 @@
 from pathlib import Path
-from typing  import Optional
+from typing import Optional, Union
 
 from data.registry import get_datasets, resolve_path
-from src.domain.scanner   import ScanType
-from src.domain.dataset   import Category, Dataset
+from src.domain.scanner import ScanType
+from src.domain.dataset import Category, Dataset
 from src.analyzer.scanner import scan
 from src.domain.models.matches import ScanMatches, FormatScan, Matches
 
@@ -29,7 +29,9 @@ def load_base(path: Path) -> list[str]:
             
     return _CACHE[path]
 
-def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[ScanType], prioritize: Optional[ScanType | set[ScanType]] = None) -> tuple[int, dict]:
+def find_exactly(password: str, dataset: Dataset, scan_type: Union[ScanType, list[ScanType]],
+    prioritize: Optional[Union[ScanType, set[ScanType]]] = None) -> tuple[int, dict]:
+    
     matches: Matches = {
         "matches"  : [],
         "severity" : [],
@@ -49,9 +51,9 @@ def find_exactly(password: str, dataset: Dataset, scan_type: ScanType | list[Sca
     return len(scann["matches"]) if not scann["matches"] is None else 0, matches
 
 def scan_matches(password: str,
-    dataset: Optional[Dataset | list[Dataset]] = None, path: Optional[Path | str] = None,
-    scan_category: Optional[Category] = None, scan_type: ScanType | list[ScanType] = ScanType.COMPLETE,
-    prioritize: Optional[ScanType | set[ScanType]] = None, statistic: bool = False) -> ScanMatches | tuple[ScanMatches, list[Dataset]]:
+    dataset: Optional[Union[Dataset, list[Dataset]]] = None, path: Optional[Union[Path, str]] = None,
+    scan_category: Optional[Category] = None, scan_type: Union[ScanType, list[ScanType]] = ScanType.COMPLETE,
+    prioritize: Optional[Union[ScanType, set[ScanType]]] = None, statistic: bool = False) -> Union[ScanMatches, tuple[ScanMatches, list[Dataset]]]:
     
     if password is None: raise ValueError("No password were given as a parameter")
 

@@ -1,7 +1,7 @@
 import time
 
 from src.domain.statistics import ExecutionMeasure
-from src.domain.dataset    import Dataset
+from src.domain.dataset import Dataset
 
 def measure(func, *args, **kwargs):
     start: float = time.perf_counter()
