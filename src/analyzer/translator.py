@@ -75,7 +75,7 @@ def translate_password(password: str, counter: bool = False) -> str | tuple[str,
     c, i, n = 0, 0, len(password)
     while i < n:
         for pattern, letters in _ALL_PATTERNS:
-            L = len(pattern)
+            L: int = len(pattern)
             if password[i:i + L] == pattern:
                 result.append(letters[0])
                 c += 1
@@ -88,7 +88,7 @@ def translate_password(password: str, counter: bool = False) -> str | tuple[str,
     return ("".join(result), c) if counter else "".join(result)
 
 def translate_candidates(password: str, limit: int = 200) -> list[str]:
-    n = len(password)
+    n: int = len(password)
     results: list[str] = list()
 
     def dfs(i: int, built: list[str]) -> None:
@@ -97,7 +97,7 @@ def translate_candidates(password: str, limit: int = 200) -> list[str]:
         if i == n:
             results.append("".join(built))
             return
-        matched = False
+        matched: bool = False
         for pattern, letters in _ALL_PATTERNS:
             L = len(pattern)
             if password[i:i + L] == pattern:

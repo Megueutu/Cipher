@@ -1,5 +1,5 @@
-from pathlib     import Path
-from typing      import Optional
+from pathlib import Path
+from typing  import Optional
 
 from data.registry import get_datasets, resolve_path
 from src.domain.scanner   import ScanType
