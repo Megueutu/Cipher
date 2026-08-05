@@ -1,8 +1,6 @@
 from dataclasses import dataclass
-from src.domain.models.entropy import EntropyScore
-
 @dataclass
-class Entropy():
-    bits:     float
-    analysis: EntropyScore
-    
+class Entropy:
+    bits: float
+    top_attempts: int
+    leet_guesses: int

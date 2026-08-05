@@ -1,9 +1,6 @@
-from typing import TypedDict, Optional, Union
+from typing import TypedDict
     
-class Guesses(TypedDict):
-    leet = Optional[int]
-
 class EntropyScore(TypedDict):
-    rank = Optional[Union[int, list[int]]]
-    guesses = Optional[Guesses]
-    
+    bits: float
+    top_attempts: int
+    leet_guesses: int
